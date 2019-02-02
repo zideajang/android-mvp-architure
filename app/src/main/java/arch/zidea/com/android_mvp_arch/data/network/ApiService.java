@@ -13,7 +13,7 @@ public interface ApiService {
             "Content-Type: application/json"
     })
     @GET("/users/{username}")
-    Single<UserResponse> loadUser(
+    Single<UserResponse> doUserApiCall(
             @Path("username") String username
     );
 }

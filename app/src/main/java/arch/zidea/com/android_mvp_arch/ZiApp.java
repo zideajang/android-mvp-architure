@@ -1,35 +1,38 @@
 package arch.zidea.com.android_mvp_arch;
 
 import android.app.Application;
-import android.support.annotation.UiThread;
 
-import arch.zidea.com.android_mvp_arch.data.pref.CacheHelper;
-import arch.zidea.com.android_mvp_arch.di.component.DaggerNetComponent;
-import arch.zidea.com.android_mvp_arch.di.component.NetComponent;
+import javax.inject.Inject;
+
+import arch.zidea.com.android_mvp_arch.data.AppRepository;
+import arch.zidea.com.android_mvp_arch.di.component.ApplicationComponent;
+import arch.zidea.com.android_mvp_arch.di.component.DaggerApplicationComponent;
 import arch.zidea.com.android_mvp_arch.di.module.ApplicationModule;
-import arch.zidea.com.android_mvp_arch.di.module.NetModule;
-import arch.zidea.com.android_mvp_arch.utils.AppConfig;
 
 public class ZiApp extends Application {
 
-    private NetComponent mNetComponent;
+    @Inject
+    AppRepository appRepository;
+
+    private ApplicationComponent mApplicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        CacheHelper.init(this);
+        mApplicationComponent = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this)).build();
+
+        mApplicationComponent.inject(this);
+
+    }
+
+    public ApplicationComponent getComponent() {
+        return mApplicationComponent;
     }
 
 
-    @UiThread
-    public  NetComponent getNetComponent(){
-        mNetComponent = DaggerNetComponent.builder()
-                // list of modules that are part of this component need to be created here too
-                .applicationModule(new ApplicationModule(this)) // This also corresponds to the name of your module: %component_name%Module
-                .netModule(new NetModule(AppConfig.BASE_URL))
-//                .netModule(new NetModule(ScConfig.WEB_SITE_URL))
-                .build();
-        return mNetComponent;
+    public void setComponent(ApplicationComponent applicationComponent) {
+        mApplicationComponent = applicationComponent;
     }
 }
