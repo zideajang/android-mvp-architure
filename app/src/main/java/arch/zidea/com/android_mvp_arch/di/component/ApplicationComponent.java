@@ -17,7 +17,7 @@ import dagger.Component;
 public interface ApplicationComponent {
 
     void inject(ZiApp app);
-    void inject(SyncService service);
+
 
     @ApplicationContext
     Context context();

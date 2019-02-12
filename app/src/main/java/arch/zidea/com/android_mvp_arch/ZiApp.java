@@ -11,8 +11,8 @@ import arch.zidea.com.android_mvp_arch.di.module.ApplicationModule;
 
 public class ZiApp extends Application {
 
-    @Inject
-    AppRepository appRepository;
+//    @Inject
+//    AppRepository appRepository;
 
     private ApplicationComponent mApplicationComponent;
 

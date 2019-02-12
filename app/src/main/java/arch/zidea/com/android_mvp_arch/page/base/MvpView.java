@@ -3,11 +3,10 @@ package arch.zidea.com.android_mvp_arch.page.base;
 import android.support.annotation.StringRes;
 
 public interface MvpView {
+
     void showLoading();
 
     void hideLoading();
-
-    void openActivityOnTokenExpire();
 
     void onError(@StringRes int resId);
 

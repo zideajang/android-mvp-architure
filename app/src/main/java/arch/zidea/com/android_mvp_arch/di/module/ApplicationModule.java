@@ -64,7 +64,6 @@ public class ApplicationModule {
     }
 
     @Provides
-    @Singleton
     OkHttpClient provideOkHttpClient(Cache cache, Application application){
         OkHttpClient.Builder client = new OkHttpClient.Builder();
         client.cache(cache);
@@ -82,7 +81,6 @@ public class ApplicationModule {
     }
 
     @Provides
-    @Singleton
     AppRepository provideAppRepository(Retrofit retrofit){
         return new AppRepository(retrofit);
     }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">android-mvp-arch</string>
+    <string name="some_error">错误消息</string>
 </resources>
